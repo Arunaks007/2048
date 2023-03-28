@@ -1,0 +1,129 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 50px;
+}
+
+body {
+  color: black;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.App > .grid {
+  display: grid;
+  grid-template-columns: 80px 80px 80px 80px;
+  grid-template-rows: 80px 80px 80px 80px;
+  justify-content: center;
+  grid-gap: 10px;
+  padding: 10px;
+  background-color: grey;
+  max-width: 370px;
+  width: 100%;
+  border-radius: 5px;
+  position: relative;
+}
+
+.App > .grid > button {
+  border-radius: 5px;
+  background-color: #cdc1b5;
+  border: none;
+  color: #434242;
+  font-size: 30px;
+  font-weight: bold;
+  /* cursor: none; */
+  transition: 200ms ease-in-out;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.titleNew {
+  animation: appear 1s;
+  animation-fill-mode: backwards;
+}
+
+.scores {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 370px;
+  width: 100px;
+  height: 90px;
+  background-color: #bbada0;
+  border-radius: 5px;
+  color: white;
+}
+
+.scores h2 {
+  margin-bottom: 2px;
+  font-size: 22px;
+}
+
+.scores h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header > h1 {
+  font-size: 100px;
+  color: #776e65;
+  margin: 0;
+}
+
+.gameover {
+  position: absolute;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  animation: appear 1s;
+}
+
+.game {
+  display: none;
+}
+
+.gameover button {
+  border-radius: 5px;
+  border: none;
+  font-size: 20px;
+  background-color: orange;
+  padding: 10px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .App > .grid {
+    grid-template-columns: repeat(4, 75px);
+    grid-template-rows: repeat(4, 75px);
+    width: 100%;
+    max-width: 350px;
+  }
+  .App {
+    margin-top: 10%;
+    width: 100%;
+  }
+}
