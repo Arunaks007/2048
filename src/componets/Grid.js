@@ -116,7 +116,7 @@ export default function Grid({
             );
           });
         })}
-        <div className={gameOver ? "gameover" : "game"}>
+        <div onClick={reset} className={gameOver ? "gameover" : "game"}>
           <h1>Game Over</h1>
           <button onClick={reset}>Try Again</button>
         </div>
