@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 export default function Grid({
   applyColor,
@@ -6,10 +6,13 @@ export default function Grid({
   getRandomNumber,
   setData,
   gameOver,
-  moveTiles
+  moveTiles,
+  setScores,
+  setGameOver,
 }) {
   const [touchStart, setTouchStart] = useState({ x: 0, y: 0 });
   const [touchEnd, setTouchEnd] = useState({ x: 0, y: 0 });
+  const [isReset, SetReset] = useState([false]);
 
   useEffect(() => {
     assignNewValueOnFirst();
@@ -21,6 +24,10 @@ export default function Grid({
       { passive: false }
     );
   }, []);
+
+  useEffect(() => {
+    isReset[0] ? assignNewValueOnFirst() : "";
+  }, [isReset]);
 
   const handleTouchStart = (e) => {
     e.preventDefault();
@@ -68,10 +75,24 @@ export default function Grid({
     let row2 = getRandomNumber();
     let column2 = getRandomNumber();
 
-    data[row1][column1] = "2";
-    data[row2][column2] = "2";
+    data[row1][column1] = 2;
+    data[row2][column2] = 2;
 
-    setData([...data]);
+    setData((da) => [...da]);
+  }
+
+  function reset() {
+    setScores(0);
+    setGameOver(false);
+    setData((data) => {
+      for (let i = 0; i < data.length; i++) {
+        for (let j = 0; j < data[i].length; j++) {
+          data[i][j] = "";
+        }
+      }
+      return data;
+    });
+    SetReset(...[[true]]);
   }
 
   return (
@@ -97,13 +118,7 @@ export default function Grid({
         })}
         <div className={gameOver ? "gameover" : "game"}>
           <h1>Game Over</h1>
-          <button
-            onClick={() => {
-              window.location.reload();
-            }}
-          >
-            Try Again
-          </button>
+          <button onClick={reset}>Try Again</button>
         </div>
       </div>
     </>

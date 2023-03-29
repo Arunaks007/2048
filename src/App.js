@@ -8,7 +8,7 @@ export default function App() {
     ["", "", "", ""],
     ["", "", "", ""],
     ["", "", "", ""],
-    ["", "", "", ""]
+    ["", "", "", ""],
   ]);
   const [scores, setScores] = useState(0);
   const [gameOver, setGameOver] = useState(false);
@@ -114,13 +114,19 @@ export default function App() {
   const addNewTile = () => {
     let row;
     let col;
+    let temp = 0;
 
     try {
       do {
+        temp++;
         row = getRandomNumber();
         col = getRandomNumber();
         if (data[row][col] === "") {
-          data[row][col] = "2";
+          data[row][col] = 2;
+          break;
+        }
+        if (temp === 1000) {
+          setGameOver(true);
           break;
         }
       } while (true);
@@ -148,6 +154,8 @@ export default function App() {
         getRandomNumber={getRandomNumber}
         gameOver={gameOver}
         moveTiles={moveTiles}
+        setScores={setScores}
+        setGameOver={setGameOver}
       />
       <div className="mobile">
         <p>Use your fingers to swipe</p>
@@ -155,5 +163,3 @@ export default function App() {
     </div>
   );
 }
-
-// Swipe Up / Down / Left / Right
